@@ -49,7 +49,6 @@ abstract class AbstractCrediMaxPayment extends JPayment{
 		
 		$amount = $this->get('total_to_pay');
 		$res = $this->callPaymentApi($merchantId, $password, $transactionName, $uniq_id, $amount, $this->getParam('testmode'));
-		var_dump($res);
 		if(!$res) {
 			echo '<div class="vbo-booking-details-head vbo-booking-details-head-cancelled retry-button " style="cursor:pointer">
 			<h4 style="color:white">Payment Gateway Error Retry</h4>
