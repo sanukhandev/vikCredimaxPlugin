@@ -119,14 +119,16 @@ add_action('payment_on_after_validation_vikbooking', function(&$payment, $res)
 		return;
 	}
 
-	$url = 'index.php?option=com_vikbooking&task=vieworder&sid=' . $payment->get('sid') . '&ts=' . $payment->get('ts');
+	var_dump($res);
+
+	$url = '?option=com_vikbooking&task=vieworder&sid=' . $payment->get('sid') . '&ts=' . $payment->get('ts');
 
 	$model 		= JModel::getInstance('vikbooking', 'shortcodes', 'admin');
-	$itemid 	= $model->all('post_id');
+	$itemid 	= $model->best(array('booking'));
 	
-	if (count($itemid))
+	if ($itemid)
 	{
-		$url = JRoute::_($url . '&Itemid=' . $itemid[0]->post_id, false);
+		$url = JRoute::_($url . '&Itemid=' . $itemid, false);
 	}
 
 	JFactory::getApplication()->redirect($url);
